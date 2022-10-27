@@ -174,3 +174,13 @@ class BuscaSenac:
             except FileNotFoundError:
                 print('Arquivo não existe.')
                 continue
+
+    def statusservico(self, status=False):
+        if status == False:
+            arquivo = open('serv', 'w+')
+            arquivo.write('1')
+            arquivo.close()
+        else:
+            arquivo = open('serv', 'w+')
+            arquivo.write('0')
+            arquivo.close()
