@@ -1,25 +1,25 @@
 import os
-
 import PySimpleGUI as sg
 from principal import BuscaSenac
 import webbrowser
 
 """
-Implementar funcionalidade de add usuários (email)
-Implementar funcionalidade de notificação por email
+Implementar funcionalidade de add usuários (email) - CONCLUÍDO
+Implementar funcionalidade de notificação por email - CONCLUÍDO
 """
-
 
 acao = BuscaSenac()
 #Tema inicial
 try:
-    configtxt = open('th').read()
+    configtxt = open('th')
+    configtxt.read()
     if configtxt == 'th2':
         tema = sg.theme('DarkBlue16')
         lay_n = 2
     else:
         tema = sg.theme('Reddit')
         lay_n = 1
+    configtxt.close()
 except FileNotFoundError:
     tema = sg.theme('Reddit')
     lay_n = 1
@@ -89,7 +89,7 @@ def tinicial2():
 #     if arq == 'cursosmem':
 #         # Aqui eu queria já deixar os nomes pré-carregados, mas não sei se vai ser ágil.
 
-def tconfig(desativado=True,ativado=False):
+def tconfig(desativado=True,ativado=False, opt_notif='Não', opt_email='Não', eml=''):
     if ativado == True:
         visible = True
     else:
@@ -100,8 +100,9 @@ def tconfig(desativado=True,ativado=False):
         [sg.Text('', size=(29,1),background_color='#ffffff'), sg.T('Ver. 1.0 por Dan F Luz',font='Arial 8',background_color='#ffffff',text_color='black')],
         [sg.Text('', size=(30,1),background_color='#ffffff')],
         [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Verificação automática',size=(23,1),background_color='#ffffff',text_color='black'),sg.Button('Desativado',visible=desativado,key='desativado',button_color='red'),sg.Button('Ativado',visible=ativado,key='ativado',button_color='green')],
-        [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Notificações push (Windows)',size=(23,1),background_color='#ffffff',text_color='black',visible=visible,key='pushtext'),sg.Combo(['Sim','Não'],['Não'],text_color='black',background_color='white',key='notif_push',size=(12),visible=visible,readonly=True)],
-        [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Notificar por email',size=(23,1),background_color='#ffffff',text_color='black',visible=visible,key='emailtext'),sg.Combo(['Sim','Não'],['Não'],text_color='black',background_color='white',key='notif_email',size=(12),visible=visible,readonly=True)],
+        [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Notificações push (Windows)',size=(23,1),background_color='#ffffff',text_color='black',visible=visible,key='pushtext'),sg.Combo(['Sim','Não'],[opt_notif],text_color='black',background_color='white',key='notif_push',size=(12),visible=visible,readonly=True)],
+        [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Notificar por email',size=(23,1),background_color='#ffffff',text_color='black',visible=visible,key='emailtext'),sg.Combo(['Sim','Não'],[opt_email],text_color='black',background_color='white',key='notif_email',size=(12),visible=visible,readonly=True)],
+        [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Email para notificações',size=(23,1),background_color='#ffffff',text_color='black',visible=visible,key='emaildesc'),sg.Input(eml,text_color='black',background_color='white',key='emailcampo',size=(30),visible=visible)],
         [sg.Text('', size=(30,1),background_color='#ffffff')],
         [sg.Text('', size=(30,1),background_color='#ffffff')],
         [sg.Text('', size=(35,1),background_color='#ffffff'),sg.B('OK',key='Voltar')]
@@ -136,8 +137,10 @@ while True:
             janela['pushtext'].update(visible=True)
             janela['notif_push'].update(visible=True)
             janela['notif_email'].update(visible=True)
+            janela['emaildesc'].update(visible=True)
+            janela['emailcampo'].update(visible=True)
             janela.refresh()
-            acao.statusservico(False)
+            acao.statusservico(True)
         if event == 'ativado': # Isso desativa tudo
             verificacao_automatica = False
             janela['ativado'].update(visible=False)
@@ -146,12 +149,24 @@ while True:
             janela['pushtext'].update(visible=False)
             janela['notif_push'].update(visible=False)
             janela['notif_email'].update(visible=False)
+            janela['emaildesc'].update(visible=False)
+            janela['emailcampo'].update(visible=False)
             janela.refresh()
-            acao.statusservico(True)
+            acao.statusservico(False)
         if event == 'Voltar': # O botão de ok
+            if '@' in value['emailcampo']:
+                acao.email = value['emailcampo']
+                eml = open('eml','w+')
+                eml.write(acao.email)
+                eml.close()
             caminhoserv = os.getcwd()
             if verificacao_automatica == True:
                 os.system(fr'schtasks /create /sc hourly /mo 1 /tn "VERIF-PSG-SENAC" /f /tr "{caminhoserv}\senacverifserv.bat" /st 00:00')
+                serv = open('senacverifserv.bat', 'w+')
+                caminho = os.getcwd()
+                texto = f'@echo off\ncd {caminho}\nSTART {caminho}\senacverifserv.exe'
+                serv.write(texto)
+                serv.close()
             else:
                 os.system('schtasks /delete /tn "VERIF-PSG-SENAC" /f')
             # Definindo opcoes no arquivo de configuração
@@ -404,13 +419,29 @@ while True:
             configtxt.close()
 
     if event == 'config':
+        try:
+            eml1 = open('eml','r')
+            eml = eml1.read()
+            eml1.close()
+        except:
+            pass
+        opt_notif, opt_email = acao.ler_stserv()
+        if opt_notif == True:
+            opt_notif = 'Sim'
+        else:
+            opt_notif = 'Não'
+        if opt_email == True:
+            opt_email = 'Sim'
+        else:
+            opt_email = 'Não'
+
         janela1 = janela
         janela1.hide()
         if janopen != True:
             if verificacao_automatica == True:
-                janela2 = tconfig(desativado=False, ativado=True)
+                janela2 = tconfig(desativado=False, ativado=True, opt_notif=opt_notif, opt_email=opt_email, eml=eml)
             else:
-                janela2 = tconfig(desativado=True, ativado=False)
+                janela2 = tconfig(desativado=True, ativado=False, opt_notif=opt_notif, opt_email=opt_email, eml=eml)
         janela = janela2
         janela.un_hide()
         janopen = True
@@ -426,3 +457,7 @@ while True:
 
 
 janela.close()
+#limpeza de tmps
+for file in os.listdir(os.getcwd()):
+    if file.endswith('.tmp'):
+        os.remove(file)

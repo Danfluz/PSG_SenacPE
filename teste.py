@@ -1,11 +1,5 @@
-arquivo = open('texto1.txt', 'r')
-substituicao = ''
-
-for line in arquivo:
-    if line.strip('\n') == 'linha2':
-        substituicao = line.replace(line, 'novotexto\n')
-
-arquivo.close()
-fout = open('texto1.txt', 'w')
-fout.write(substituicao)
-fout.close()
+serv = open('senacverifserv.bat','w+')
+caminho = os.getcwd()
+texto = fr'cd {caminho}\nSTART {caminho}\senacverifserv.exe'
+serv.write(texto)
+serv.close()
