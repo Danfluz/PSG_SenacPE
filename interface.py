@@ -4,7 +4,7 @@ from principal import BuscaSenac
 import webbrowser
 
 """
-Implementar funcionalidade de add usuários (email) - CONCLUÍDO
+Implementar funcionalidade de add usuário (email) - CONCLUÍDO
 Implementar funcionalidade de notificação por email - CONCLUÍDO
 """
 
@@ -12,16 +12,13 @@ acao = BuscaSenac()
 #Tema inicial
 try:
     configtxt = open('th')
-    configtxt.read()
-    if configtxt == 'th2':
-        tema = sg.theme('DarkBlue16')
+    cnf = configtxt.read()
+    if cnf == 'th2':
         lay_n = 2
     else:
-        tema = sg.theme('Reddit')
         lay_n = 1
     configtxt.close()
 except FileNotFoundError:
-    tema = sg.theme('Reddit')
     lay_n = 1
 
 mudoutema = False
@@ -90,6 +87,7 @@ def tinicial2():
 #         # Aqui eu queria já deixar os nomes pré-carregados, mas não sei se vai ser ágil.
 
 def tconfig(desativado=True,ativado=False, opt_notif='Não', opt_email='Não', eml=''):
+    sg.theme('Reddit')
     if ativado == True:
         visible = True
     else:
@@ -393,7 +391,6 @@ while True:
             configtxt = open('th', 'r').read()
             if configtxt == 'th2':
                 janela.close()
-                sg.theme('Reddit')
                 janela = tinicial()
                 configtxt = open('th', 'w+')
                 mudoutema = True
@@ -401,7 +398,6 @@ while True:
                 configtxt.close()
             elif configtxt == 'th1':
                 janela.close()
-                sg.theme('DarkBlue16')
                 mudoutema = True
                 janela = tinicial2()
                 configtxt = open('th', 'w+')
@@ -411,7 +407,6 @@ while True:
                 os.remove(configtxt)
         except FileNotFoundError:
             janela.close()
-            sg.theme('DarkBlue16')
             mudoutema = True
             janela = tinicial2()
             configtxt = open('th', 'w+')

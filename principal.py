@@ -9,7 +9,12 @@ import win10toast
 
 class BuscaSenac:
 
-    email = 'danilofluz@recife.pe.senac.br'
+    try:
+        emltemp = open('eml','r')
+        email = emltemp.read()
+        emltemp.close()
+    except FileNotFoundError:
+        email = 'nenhumemailcadastrado'
     notificacao = win10toast.ToastNotifier()
 
     try:
@@ -35,7 +40,7 @@ class BuscaSenac:
     def enviar_email(self, mensagem):
         msg = email.message.Message()
         msg['Subject'] = 'Assunto'
-        msg['From'] = 'contafalsaparajogarfora1123'+provedor
+        msg['From'] = 'contafalsaparajogarfora1123'+self.provedor
         msg['To'] = self.email
         senha = 'zruucbxmjfpiwzgk'
         msg.add_header('Content-Type', 'text/html')
@@ -54,7 +59,7 @@ class BuscaSenac:
                 if printi == True:
                     print('** Há novos editais desde sua última visita! **')
                 if email == True:
-                    self.enviar_email('Saíram novos editais no Programa de Gratuidade do Senac!\nSe inscreva em: etc etc etc (colocar o link)')
+                    self.enviar_email('Existem novos editais disponiveis no Programa de Gratuidade do Senac!\nSe inscreva em: etc etc etc (colocar o link)')
                 if notificar == True:
                     self.notificacao.show_toast('Programa de Gratuidade do Senac','Existem novos editais no Programa de Gratuidade do Senac!','img/senacico.ico',duration=10)
                 if servico == True:

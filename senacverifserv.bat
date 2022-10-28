@@ -1,3 +1,3 @@
 @echo off
-cd C:\Users\dan\PycharmProjects\divulgacaosenac
-START C:\Users\dan\PycharmProjects\divulgacaosenac\senacverifserv.exe
+cd C:\Users\dan\PycharmProjects\PSG_SenacPE
+START C:\Users\dan\PycharmProjects\PSG_SenacPE\senacverifserv.exe

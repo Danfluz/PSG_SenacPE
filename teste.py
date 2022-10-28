@@ -1,5 +1,3 @@
-serv = open('senacverifserv.bat','w+')
-caminho = os.getcwd()
-texto = fr'cd {caminho}\nSTART {caminho}\senacverifserv.exe'
-serv.write(texto)
-serv.close()
+provedor = '@gmail.com'
+
+print('contafalsaparajogarfora1123'+provedor)
