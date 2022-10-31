@@ -59,7 +59,7 @@ class BuscaSenac:
                 if printi == True:
                     print('** Há novos editais desde sua última visita! **')
                 if email == True:
-                    self.enviar_email('Existem novos editais disponiveis no Programa de Gratuidade do Senac!\nSe inscreva em: etc etc etc (colocar o link)')
+                    self.enviar_email('Existem novos editais disponiveis no Programa de Gratuidade do Senac!\nSe inscreva em: https://intranet.pe.senac.br/dr/nova/psgnet/Default.aspx')
                 if notificar == True:
                     self.notificacao.show_toast('Programa de Gratuidade do Senac','Existem novos editais no Programa de Gratuidade do Senac!','img/senacico.ico',duration=10)
                 if servico == True:
