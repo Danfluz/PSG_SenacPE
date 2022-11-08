@@ -242,7 +242,7 @@ while True:
             janela.refresh()
             janela['status'].update(acao.verificar_novidades())
         else:
-            sg.popup_no_buttons('Isso pode levar até 10 minutos dependendo\n\tda conexão entre você e o Senac.\n\t\t\tAguarde...', auto_close_duration=60, non_blocking=True, no_titlebar=True,
+            sg.popup_no_buttons('Isso pode levar até 10 minutos dependendo\n\tda conexão entre você e o Senac.\n\t\t\tAguarde...', auto_close_duration=20, non_blocking=True, no_titlebar=True,
                                 keep_on_top=True, background_color='lightblue', auto_close=True,text_color='black')
             acao.baixar_editais(index=0)
             janela['edital1'].update(acao.ler_editais(index=0)[0][1])
