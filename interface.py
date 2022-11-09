@@ -26,6 +26,7 @@ mudoufixo = False
 janopen = False
 configopen = False
 segspadrao = 5
+reset_opcoes = False
 try:
     file = open('serv','r')
     numerobol = int(file.read())
@@ -43,7 +44,7 @@ def tinicial():
         # [sg.Text('', size=(30,1),background_color='#ffffff'), sg.Image('img/senac.png',subsample=1,background_color='#ffffff'),sg.T('',size=(20,1),background_color='#ffffff'),sg.Button('',image_filename='img/pincel1b.png',auto_size_button=True,button_color='#EA951E',key='mudartema')],
         [sg.Text('', size=(18,1),background_color='#ffffff'), sg.Text('Programa Senac de Gratuidade',text_color='#1a1a1b',font='Arial 14 bold',background_color='#ffffff')],
         [sg.Text('',size=(29,1),background_color='#ffffff'), sg.Text('',font='Arial 8',background_color='#ffffff',text_color='#1a1a1b'), sg.Text('',background_color='#ffffff')],
-        [sg.Text('\nClique para verificar os editais recentes:',font='Arial 10',text_color='#1a1a1b',size=(30,3),background_color='#ffffff'), sg.Button('Verificar',button_color='#0079d3')],
+        [sg.Text('\nClique para verificar os editais recentes:',font='Arial 10',text_color='#1a1a1b',size=(30,3),background_color='#ffffff'), sg.Button('Verificar',button_color=('#0079d3'))],
         [sg.Text('Editais:',font='Arial 11 bold',background_color='#ffffff',text_color='#1a1a1b')],
         [sg.Text('',background_color='#ffffff'),sg.Text('',background_color='#ffffff',text_color='#1a1a1b',key='edital1',size=(40,1)),sg.Button('Cursos',visible=False,key='ver1',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf1',button_color='#0079d3')],
         [sg.Text('',background_color='#ffffff'),sg.Text('',background_color='#ffffff',text_color='#1a1a1b',key='edital2',size=(40,1)),sg.Button('Cursos',visible=False,key='ver2',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf2',button_color='#0079d3')],
@@ -66,18 +67,18 @@ def tinicial2():
         [sg.Text('', size=(30,1),background_color='#1c44ac'), sg.Image('img/senac2.png',subsample=1,background_color='#1c44ac'),sg.T('',size=(20,1),background_color='#1c44ac'),sg.Button('',image_filename='img/pincel1b.png',auto_size_button=True,button_color='#1c44ac',key='mudartema'),sg.Button('',image_filename='img/conf1b.png',button_color='#1c44ac',key='config',image_size=(25,20),auto_size_button=True)],
         [sg.Text('', size=(18,1),background_color='#1c44ac'), sg.Text('Programa Senac de Gratuidade',font='Arial 14 bold',background_color='#1c44ac',text_color='white')],
         [sg.Text('',size=(29,1),background_color='#1c44ac'), sg.Text('',background_color='#1c44ac',font='Arial 8',text_color='white'), sg.Text('',background_color='#1c44ac',text_color='white')],
-        [sg.Text('\nClique para verificar os editais recentes:',font='Arial 10',size=(30,3),background_color='#1c44ac',text_color='white'), sg.Button('Verificar',button_color='#0079d3')],
+        [sg.Text('\nClique para verificar os editais recentes:',font='Arial 10',size=(30,3),background_color='#1c44ac',text_color='white'), sg.Button('Verificar',button_color=('white','#0079d3'))],
         [sg.Text('Editais:',font='Arial 11 bold',background_color='#1c44ac',text_color='white')],
-        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital1',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver1',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf1',button_color='#0079d3')],
-        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital2',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver2',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf2',button_color='#0079d3')],
-        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital3',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver3',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf3',button_color='#0079d3')],
-        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital4',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver4',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf4',button_color='#0079d3')],
-        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital5',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver5',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf5',button_color='#0079d3')],
-        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital6',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver6',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf6',button_color='#0079d3')],
-        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital7',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver7',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf7',button_color='#0079d3')],
-        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital8',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver8',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf8',button_color='#0079d3')],
-        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital9',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver9',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf9',button_color='#0079d3')],
-        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital10',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver10',button_color='#0079d3'),sg.Button('Abrir Edital',visible=False,key='pdf10',button_color='#0079d3')],
+        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital1',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver1',button_color=('white','#0079d3')),sg.Button('Abrir Edital',visible=False,key='pdf1',button_color=('white','#0079d3'))],
+        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital2',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver2',button_color=('white','#0079d3')),sg.Button('Abrir Edital',visible=False,key='pdf2',button_color=('white','#0079d3'))],
+        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital3',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver3',button_color=('white','#0079d3')),sg.Button('Abrir Edital',visible=False,key='pdf3',button_color=('white','#0079d3'))],
+        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital4',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver4',button_color=('white','#0079d3')),sg.Button('Abrir Edital',visible=False,key='pdf4',button_color=('white','#0079d3'))],
+        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital5',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver5',button_color=('white','#0079d3')),sg.Button('Abrir Edital',visible=False,key='pdf5',button_color=('white','#0079d3'))],
+        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital6',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver6',button_color=('white','#0079d3')),sg.Button('Abrir Edital',visible=False,key='pdf6',button_color=('white','#0079d3'))],
+        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital7',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver7',button_color=('white','#0079d3')),sg.Button('Abrir Edital',visible=False,key='pdf7',button_color=('white','#0079d3'))],
+        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital8',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver8',button_color=('white','#0079d3')),sg.Button('Abrir Edital',visible=False,key='pdf8',button_color=('white','#0079d3'))],
+        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital9',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver9',button_color=('white','#0079d3')),sg.Button('Abrir Edital',visible=False,key='pdf9',button_color=('white','#0079d3'))],
+        [sg.Text('',background_color='#1c44ac'),sg.Text('',text_color='white',key='edital10',size=(40,1),background_color='#1c44ac'),sg.Button('Cursos',visible=False,key='ver10',button_color=('white','#0079d3')),sg.Button('Abrir Edital',visible=False,key='pdf10',button_color=('white','#0079d3'))],
         [sg.Text('',background_color='#1c44ac',size=(20,3)),sg.Text('',text_color='white',size=(40,1),background_color='#1c44ac',key='status')],
     ]
     return sg.Window('PSG', layout=layout, finalize=True, size=(630,600),icon='img/senacico.ico')
@@ -95,7 +96,7 @@ def tconfig(desativado=True,ativado=False, opt_notif='Não', opt_email='Não', e
     layout = [
         [sg.Text('', size=(30,1),background_color='#ffffff'), sg.Image('img/senac.png',subsample=1,background_color='#ffffff')],
         [sg.Text('', size=(27,1),background_color='#ffffff'), sg.Text('Configurações',text_color='#1a1a1b',font='Arial 14 bold',background_color='#ffffff')],
-        [sg.Text('', size=(29,1),background_color='#ffffff'), sg.T('Ver. 1.0 por Dan F Luz',font='Arial 8',background_color='#ffffff',text_color='black')],
+        [sg.Text('', size=(29,1),background_color='#ffffff'), sg.T('Ver. 1.1 por Dan F Luz',font='Arial 8',background_color='#ffffff',text_color='black')],
         [sg.Text('', size=(30,1),background_color='#ffffff')],
         [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Verificação automática',size=(23,1),background_color='#ffffff',text_color='black'),sg.Button('Desativado',visible=desativado,key='desativado',button_color='red'),sg.Button('Ativado',visible=ativado,key='ativado',button_color='green')],
         [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Notificações push (Windows)',size=(23,1),background_color='#ffffff',text_color='black',visible=visible,key='pushtext'),sg.Combo(['Sim','Não'],[opt_notif],text_color='black',background_color='white',key='notif_push',size=(12),visible=visible,readonly=True)],
@@ -103,7 +104,15 @@ def tconfig(desativado=True,ativado=False, opt_notif='Não', opt_email='Não', e
         [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Email para notificações',size=(23,1),background_color='#ffffff',text_color='black',visible=visible,key='emaildesc'),sg.Input(eml,text_color='black',background_color='white',key='emailcampo',size=(30),visible=visible)],
         [sg.Text('', size=(30,1),background_color='#ffffff')],
         [sg.Text('', size=(30,1),background_color='#ffffff')],
-        [sg.Text('', size=(35,1),background_color='#ffffff'),sg.B('OK',key='Voltar')]
+        [sg.Text('', size=(35,1),background_color='#ffffff'),sg.B('OK',key='Voltar')],
+        [sg.Text('', size=(30, 1), background_color='#ffffff')],
+        [sg.Text('', size=(30, 1), background_color='#ffffff')],
+        [sg.Text('', size=(30, 1), background_color='#ffffff')],
+        [sg.Text('', size=(30, 1), background_color='#ffffff')],
+        [sg.Text('', size=(30, 1), background_color='#ffffff')],
+        [sg.Text('', size=(30, 1), background_color='#ffffff')],
+        [sg.Text('', size=(30, 1), background_color='#ffffff')],
+        [sg.Text('', size=(62, 1), background_color='#ffffff'), sg.B('Resetar', key='Resetar', button_color=('black','white'),mouseover_colors='lightgray')],
     ]
 
     return sg.Window('PSG', layout=layout, finalize=True, size=(630,600),background_color='#ffffff',icon='img/senacico.ico')
@@ -181,10 +190,15 @@ while True:
             textoopts.close()
 
     if event == sg.WIN_CLOSED:
+        if reset_opcoes == True:
+            acao.opcoes = ''
         cursosmem = open('cursosmem', 'w+')
         cursosmem.write(str(acao.opcoes))
         cursosmem.close()
         break
+
+    if event == 'Resetar':
+        reset_opcoes = True
 
     if event == 'Verificar':
         if segurança == True:
@@ -243,7 +257,7 @@ while True:
             janela['status'].update(acao.verificar_novidades())
         else:
             sg.popup_no_buttons('Isso pode levar até 10 minutos dependendo\n\tda conexão entre você e o Senac.\n\t\t\tAguarde...', auto_close_duration=20, non_blocking=True, no_titlebar=True,
-                                keep_on_top=True, background_color='lightblue', auto_close=True,text_color='black')
+                                keep_on_top=False, background_color='lightblue', auto_close=True,text_color='black')
             acao.baixar_editais(index=0)
             janela['edital1'].update(acao.ler_editais(index=0)[0][1])
             janela['ver1'].update(visible=True)
