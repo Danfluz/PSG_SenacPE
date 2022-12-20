@@ -4,8 +4,9 @@ from principal import BuscaSenac
 import webbrowser
 
 """
-Implementar funcionalidade de add usuário (email) - CONCLUÍDO
-Implementar funcionalidade de notificação por email - CONCLUÍDO
+Implementar funcionalidade de add usuário (email) - CONCLUÍDO 1.0
+Implementar funcionalidade de notificação por email - CONCLUÍDO 1.1
+Implementar funcionalidade de verificar inscrições abertas - PENDENTE
 """
 
 acao = BuscaSenac()
@@ -96,7 +97,7 @@ def tconfig(desativado=True,ativado=False, opt_notif='Não', opt_email='Não', e
     layout = [
         [sg.Text('', size=(30,1),background_color='#ffffff'), sg.Image('img/senac.png',subsample=1,background_color='#ffffff')],
         [sg.Text('', size=(27,1),background_color='#ffffff'), sg.Text('Configurações',text_color='#1a1a1b',font='Arial 14 bold',background_color='#ffffff')],
-        [sg.Text('', size=(29,1),background_color='#ffffff'), sg.T('Ver. 1.1 por Dan F Luz',font='Arial 8',background_color='#ffffff',text_color='black')],
+        [sg.Text('', size=(29,1),background_color='#ffffff'), sg.T('Ver. 1.1b por Dan F Luz',font='Arial 8',background_color='#ffffff',text_color='black')],
         [sg.Text('', size=(30,1),background_color='#ffffff')],
         [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Verificação automática',size=(23,1),background_color='#ffffff',text_color='black'),sg.Button('Desativado',visible=desativado,key='desativado',button_color='red'),sg.Button('Ativado',visible=ativado,key='ativado',button_color='green')],
         [sg.Text('', size=(15,1),background_color='#ffffff'),sg.T('Notificações push (Windows)',size=(23,1),background_color='#ffffff',text_color='black',visible=visible,key='pushtext'),sg.Combo(['Sim','Não'],[opt_notif],text_color='black',background_color='white',key='notif_push',size=(12),visible=visible,readonly=True)],
@@ -192,6 +193,7 @@ while True:
     if event == sg.WIN_CLOSED:
         if reset_opcoes == True:
             acao.opcoes = ''
+
         cursosmem = open('cursosmem', 'w+')
         cursosmem.write(str(acao.opcoes))
         cursosmem.close()
@@ -254,6 +256,7 @@ while True:
             janela['ver10'].update(visible=True)
             janela['pdf10'].update(visible=True)
             janela.refresh()
+            janela.force_focus()
             janela['status'].update(acao.verificar_novidades())
         else:
             sg.popup_no_buttons('Isso pode levar até 10 minutos dependendo\n\tda conexão entre você e o Senac.\n\t\t\tAguarde...', auto_close_duration=20, non_blocking=True, no_titlebar=True,
@@ -309,6 +312,7 @@ while True:
             janela['pdf10'].update(visible=True)
             janela.refresh()
             janela['status'].update(acao.verificar_novidades())
+            janela.force_focus()
 
     if event == 'ver1':
         if acao.lista_cursos1 == None:
